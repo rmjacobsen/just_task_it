@@ -48,7 +48,6 @@ class _HomeState extends State<Home> {
         ],
         controller: pageController,
         onPageChanged: onPageChanged,
-        physics: NeverScrollableScrollPhysics(),
       ),
       bottomNavigationBar: CupertinoTabBar(
           currentIndex: pageIndex,
