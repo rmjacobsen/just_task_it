@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:just_task_it/apps/task_manager/screens/done_screen.dart';
-import 'package:just_task_it/apps/task_manager/screens/overview_screen.dart';
+import './../apps/task_manager/screens/done_screen.dart';
+import './../apps/task_manager/screens/overview_screen.dart';
 
-class Home extends StatefulWidget {
+class Wrapper extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _WrapperState createState() => _WrapperState();
 }
 
-class _HomeState extends State<Home> {
+class _WrapperState extends State<Wrapper> {
   PageController pageController;
   int pageIndex = 0;
 

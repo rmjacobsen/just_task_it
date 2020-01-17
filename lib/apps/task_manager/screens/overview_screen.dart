@@ -1,30 +1,30 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:just_task_it/apps/task_manager/models/task.dart';
-import 'package:just_task_it/apps/task_manager/models/task_list.dart';
+import 'package:just_task_it/apps/task_manager/screens/task_detail_screen.dart';
+import 'package:just_task_it/core/services/db_helper.dart';
+import '../models/task.dart';
+import '../models/task_list.dart';
 
 import '../widgets/rounded_button.dart';
 import '../../../core/widgets/header.dart';
 
-import 'package:flutter/scheduler.dart' show timeDilation;
-
 List DUMMY_LISTS = [
   TaskList(
     id: "l1",
-    listName: "House Tasks",
-    color: Colors.green,
+    title: "House Tasks",
+    color: Colors.green.value,
     icon: Icon(Icons.home),
   ),
   TaskList(
     id: "l2",
-    listName: "Work",
-    color: Colors.blue,
+    title: "Work",
+    color: Colors.blue.value,
     icon: Icon(Icons.work),
   ),
   TaskList(
     id: "l3",
-    listName: "School Assignments",
-    color: Colors.pink,
+    title: "School Assignments",
+    color: Colors.pink.value,
     icon: Icon(Icons.school),
   ),
 ];
@@ -97,7 +97,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildHeader(context, appTitle: true),
+      appBar: buildHeader(context, isAppTitle: true),
       body: Column(
         children: <Widget>[
           Container(
@@ -112,7 +112,15 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    buildRoundedButton(context, "Add Task", () {}),
+                    buildRoundedButton(
+                      context,
+                      "Add Task",() {
+                      Navigator.of(context).push( 
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => TaskDetailScreen(),
+                        ),
+                      );
+                      }),
                     buildRoundedButton(context, "Add List", () {}),
                   ],
                 ),
@@ -139,7 +147,8 @@ class _OverviewScreenState extends State<OverviewScreen> {
                         setState(() {
                           return DUMMY_TASKS[i].isDone = !DUMMY_TASKS[i].isDone;
                         });
-                        print("Task: ${DUMMY_TASKS[i].title} Status: ${DUMMY_TASKS[i].isDone}");
+                        print(
+                            "Task: ${DUMMY_TASKS[i].title} Status: ${DUMMY_TASKS[i].isDone}");
                       },
                     ),
                     shrinkWrap: true,
@@ -154,9 +163,18 @@ class _OverviewScreenState extends State<OverviewScreen> {
               itemCount: DUMMY_LISTS.length,
               itemBuilder: (BuildContext context, int i) => Container(
                 width: 200,
-                child: Card(
-                  color: DUMMY_LISTS[i].color,
-                  child: Text(DUMMY_LISTS[i].listName, style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
+                child: Column(
+                  children: [
+                    Card(
+                      color: Color(DUMMY_LISTS[i].color),
+                      child: Text(
+                        DUMMY_LISTS[i].title,
+                        style: TextStyle(fontSize: 20),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Icon(IconData(59641, fontFamily: 'MaterialIcons')),
+                  ],
                 ),
               ),
               enableInfiniteScroll: false,

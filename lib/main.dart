@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:just_task_it/core/home.dart';
 
-void main() {
+import './core/wrapper.dart';
+
+
+
+void main() async {
   runApp(MyApp());
 }
 
@@ -14,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepOrange,
         accentColor: Colors.amber,
       ),
-      home: Home(),
+      home: Wrapper(),
       debugShowCheckedModeBanner: false,
     );
   }

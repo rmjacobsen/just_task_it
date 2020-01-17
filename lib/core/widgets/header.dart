@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 // Set appTitle true whenever no specific title is required.
 // Otherwise, use titleText for the desired title.
-AppBar buildHeader(context, {bool appTitle = false, String titleText}) {
+AppBar buildHeader(context, {bool isAppTitle = false, String titleText}) {
   return AppBar(
-    backgroundColor: Colors.white,
-    title: appTitle
+    backgroundColor: isAppTitle ? Colors.white : Colors.black,
+    title: isAppTitle
         ? Text(
             "Just Task It",
             style: TextStyle(
@@ -16,6 +16,6 @@ AppBar buildHeader(context, {bool appTitle = false, String titleText}) {
             ),
           )
         : Text(titleText),
-    elevation: appTitle ? 0.0 : 4.0,
+    elevation: isAppTitle ? 0.0 : 4.0,
   );
 }
